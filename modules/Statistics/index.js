@@ -1,6 +1,12 @@
-const { gql } = require('apollo-server');
-const { createModule } = require('graphql-modules');
-const fetch = require('node-fetch');
+import { gql } from 'apollo-server';
+import { createModule } from 'graphql-modules';
+import fetch from 'node-fetch';
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const statisticsResolvers = {
   Query: {
@@ -75,4 +81,4 @@ const statisticsModule = createModule({
   resolvers: [statisticsResolvers]
 });
 
-module.exports = statisticsModule;
+export default statisticsModule;

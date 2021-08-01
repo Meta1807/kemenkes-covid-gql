@@ -8,6 +8,4 @@ COPY package.json ./
 
 RUN npm install --silent
 
-EXPOSE 4002
-
 CMD [ -d "node_modules" ] && npm run start || npm ci && npm run start

@@ -8,6 +8,10 @@ const statisticsResolvers = {
       const data = await fetch('https://data.covid19.go.id/public/api/prov.json').then((res) => res.json());
       return data
     },
+    statisticsByRegion: async (_, { region }) => {
+      const data = await fetch('https://data.covid19.go.id/public/api/prov.json').then((res) => res.json());
+      return data.list_data.find((item) => item.key === region);
+    },
     regions: async () => {
       const data = await fetch('https://data.covid19.go.id/public/api/prov.json').then((res) => res.json());
       return data.list_data.map((item) => item.key);
@@ -23,10 +27,11 @@ const statisticsModule = createModule({
       type Query {
         statistics: Statistics
         regions: [String]
+        statisticsByRegion(region: String): StatisticsRegion
       }
 
       type StatisticsKelompokValue {
-        value: Int
+        value: Float
       }
 
       type StatisticsKelompok {
